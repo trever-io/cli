@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/AlexsJones/cli/cli"
-	"github.com/AlexsJones/cli/command"
+    "github.com/Sneaksolid/cli/cli"
+    "github.com/Sneaksolid/cli/command"
 )
 
 func AddCommands(c *cli.Cli) {

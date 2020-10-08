@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"strings"
 
-	"github.com/AlexsJones/cli/command"
+    "github.com/Sneaksolid/cli/command"
 	"github.com/chzyer/readline"
 	"github.com/fatih/color"
 )

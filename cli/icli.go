@@ -1,6 +1,6 @@
 package cli
 
-import "github.com/AlexsJones/cli/command"
+import "github.com/Sneaksolid/cli/command"
 
 //ICli is the common mockable interface for Cli
 type ICli interface {

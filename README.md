@@ -1,6 +1,6 @@
 # cli
 
-Forked from: https://github.com/AlexsJones/cli
+Forked from: https://github.com/Sneaksolid/cli
 
 This is a simple interactive prompt for go that actually supports sub-commands, because I couldn't find one that did...
 Supports unlimited subcommand nesting.
@@ -48,8 +48,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/AlexsJones/cli/cli"
-	"github.com/AlexsJones/cli/command"
+	"github.com/Sneaksolid/cli/cli"
+	"github.com/Sneaksolid/cli/command"
 )
 
 func main() {
@@ -85,8 +85,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/AlexsJones/cli/cli"
-	"github.com/AlexsJones/cli/command"
+	"github.com/Sneaksolid/cli/cli"
+	"github.com/Sneaksolid/cli/command"
 )
 
 func main() {
