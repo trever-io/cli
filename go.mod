@@ -1,4 +1,4 @@
-module github.com/AlexsJones/cli
+module github.com/Sneaksolid/cli
 
 go 1.14
 
