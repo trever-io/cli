@@ -79,7 +79,7 @@ func AddCommands(c *cli.Cli) {
 }
 func main() {
 
-	c := cli.NewCli()
+    c := cli.NewCli(">>>  ", "exit")
 	AddCommands(c)
 	c.Run()
 }

@@ -16,7 +16,7 @@ import (
 **********************************************************************************/
 func TestAddCommand(t *testing.T) {
 
-	cli := cli.NewCli()
+    cli := cli.NewCli(">>>  ", "exit")
 
 	cli.AddCommand(command.Command{})
 
