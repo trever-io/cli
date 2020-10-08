@@ -18,6 +18,9 @@ type Cli struct {
 	Commands       []command.Command
 	ReadlineConfig *readline.Config
 	Scanner        *readline.Instance
+
+    EOFPrompt      string
+    Prompt         string
 }
 
 func filterInput(r rune) (rune, bool) {
@@ -33,15 +36,18 @@ var completer = readline.NewPrefixCompleter()
 
 //NewCli creates a new instance of Cli
 //It returns a pointer to the Cli object
-func NewCli() *Cli {
-	c := &Cli{}
+func NewCli(prompt string, eofPrompt string) *Cli {
+    c := &Cli{
+        Prompt: prompt,
+        EOFPrompt: eofPrompt,
+    }
 
 	l, err := readline.NewEx(&readline.Config{
-		Prompt:          ">>> ",
+        Prompt:          c.Prompt,
 		HistoryFile:     "/tmp/readline.tmp",
 		AutoComplete:    completer,
 		InterruptPrompt: "^C",
-		EOFPrompt:       "exit",
+        EOFPrompt:       eofPrompt,
 		//TODO some weird version error broke this
 		HistorySearchFold:   true,
 		FuncFilterInputRune: filterInput,
@@ -105,7 +111,7 @@ func (cli *Cli) recurseHelp(c []command.Command, rootCommands []string, offset i
 }
 
 func (cli *Cli) parseSystemCommands(input []string) error {
-	if input[0] == "exit" {
+    if input[0] == cli.EOFPrompt {
 		fmt.Println("Bye")
 		os.Exit(0)
 	}
@@ -185,7 +191,7 @@ func (cli *Cli) Run() {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	go func() {
-		for _ = range c {
+		for range c {
 			fmt.Printf("\nBye\n")
 			os.Exit(0)
 		}
