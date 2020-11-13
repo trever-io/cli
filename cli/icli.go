@@ -1,6 +1,6 @@
 package cli
 
-import "github.com/Sneaksolid/cli/command"
+import "github.com/trever-io/go-cli/command"
 
 //ICli is the common mockable interface for Cli
 type ICli interface {

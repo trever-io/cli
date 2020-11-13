@@ -4,13 +4,12 @@ package cli
 
 import (
 	"fmt"
+	"github.com/chzyer/readline"
+	"github.com/fatih/color"
+	"github.com/trever-io/go-cli/command"
 	"os"
 	"os/signal"
 	"strings"
-
-    "github.com/Sneaksolid/cli/command"
-	"github.com/chzyer/readline"
-	"github.com/fatih/color"
 )
 
 //Cli structure contains configuration and commands
@@ -19,8 +18,8 @@ type Cli struct {
 	ReadlineConfig *readline.Config
 	Scanner        *readline.Instance
 
-    EOFPrompt      string
-    Prompt         string
+	EOFPrompt string
+	Prompt    string
 }
 
 func filterInput(r rune) (rune, bool) {
@@ -37,17 +36,17 @@ var completer = readline.NewPrefixCompleter()
 //NewCli creates a new instance of Cli
 //It returns a pointer to the Cli object
 func NewCli(prompt string, eofPrompt string) *Cli {
-    c := &Cli{
-        Prompt: prompt,
-        EOFPrompt: eofPrompt,
-    }
+	c := &Cli{
+		Prompt:    prompt,
+		EOFPrompt: eofPrompt,
+	}
 
 	l, err := readline.NewEx(&readline.Config{
-        Prompt:          c.Prompt,
+		Prompt:          c.Prompt,
 		HistoryFile:     "/tmp/readline.tmp",
 		AutoComplete:    completer,
 		InterruptPrompt: "^C",
-        EOFPrompt:       eofPrompt,
+		EOFPrompt:       eofPrompt,
 		//TODO some weird version error broke this
 		HistorySearchFold:   true,
 		FuncFilterInputRune: filterInput,
@@ -111,7 +110,7 @@ func (cli *Cli) recurseHelp(c []command.Command, rootCommands []string, offset i
 }
 
 func (cli *Cli) parseSystemCommands(input []string) error {
-    if input[0] == cli.EOFPrompt {
+	if input[0] == cli.EOFPrompt {
 		fmt.Println("Bye")
 		os.Exit(0)
 	}

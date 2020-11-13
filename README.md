@@ -38,7 +38,7 @@ submodule sub commands:
 # Installation
 
 ```
-go get github.com/Sneaksolid/cli/cli
+go get github.com/trever-io/go-cli/cli
 ```
 # Simple example
 
@@ -47,9 +47,8 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/Sneaksolid/cli/cli"
-	"github.com/Sneaksolid/cli/command"
+	"github.com/trever-io/go-cli/cli"
+	"github.com/trever-io/go-cli/command"
 )
 
 func main() {
@@ -84,9 +83,8 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/Sneaksolid/cli/cli"
-	"github.com/Sneaksolid/cli/command"
+	"github.com/trever-io/go-cli/cli"
+	"github.com/trever-io/go-cli/command"
 )
 
 func main() {

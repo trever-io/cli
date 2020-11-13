@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
-
-    "github.com/Sneaksolid/cli/cli"
-    "github.com/Sneaksolid/cli/command"
+	"github.com/trever-io/go-cli/cli"
+	"github.com/trever-io/go-cli/command"
 )
 
 func AddCommands(c *cli.Cli) {
@@ -79,7 +78,7 @@ func AddCommands(c *cli.Cli) {
 }
 func main() {
 
-    c := cli.NewCli(">>>  ", "exit")
+	c := cli.NewCli(">>>  ", "exit")
 	AddCommands(c)
 	c.Run()
 }

@@ -1,10 +1,9 @@
 package main
 
 import (
+	"github.com/trever-io/go-cli/cli"
+	"github.com/trever-io/go-cli/command"
 	"testing"
-
-    "github.com/Sneaksolid/cli/cli"
-    "github.com/Sneaksolid/cli/command"
 )
 
 /*********************************************************************************
@@ -16,7 +15,7 @@ import (
 **********************************************************************************/
 func TestAddCommand(t *testing.T) {
 
-    cli := cli.NewCli(">>>  ", "exit")
+	cli := cli.NewCli(">>>  ", "exit")
 
 	cli.AddCommand(command.Command{})
 

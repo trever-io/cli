@@ -1,4 +1,4 @@
-module github.com/Sneaksolid/cli
+module github.com/trever-io/go-cli
 
 go 1.15
 
