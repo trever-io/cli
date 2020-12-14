@@ -130,6 +130,7 @@ func (cli *Cli) parseSystemCommands(input []string) error {
 }
 
 func (cli *Cli) recurse(c []command.Command, args []string, i int) error {
+	notFound := true
 	for _, cmd := range c {
 		if i > len(args) {
 			return nil
@@ -141,13 +142,17 @@ func (cli *Cli) recurse(c []command.Command, args []string, i int) error {
 				} else {
 					cmd.Func(args[i+1:])
 					fmt.Printf("\n")
+					notFound = false
 				}
 			} else {
 				cmd.Func(args[i+1:])
 				fmt.Printf("\n")
+				notFound = false
 			}
-
 		}
+	}
+	if notFound && len(args) > 0 && args[0] != "help" {
+		fmt.Println("command not found")
 	}
 	return nil
 }
