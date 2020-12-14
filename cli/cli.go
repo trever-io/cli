@@ -17,9 +17,9 @@ type Cli struct {
 	Commands       []command.Command
 	ReadlineConfig *readline.Config
 	Scanner        *readline.Instance
-
-	EOFPrompt string
-	Prompt    string
+	EOFPrompt      string
+	Prompt         string
+	OfflineMode    bool
 }
 
 func filterInput(r rune) (rune, bool) {
@@ -35,10 +35,11 @@ var completer = readline.NewPrefixCompleter()
 
 //NewCli creates a new instance of Cli
 //It returns a pointer to the Cli object
-func NewCli(prompt string, eofPrompt string) *Cli {
+func NewCli(prompt string, eofPrompt string, offlineMode bool) *Cli {
 	c := &Cli{
 		Prompt:    prompt,
 		EOFPrompt: eofPrompt,
+		OfflineMode: offlineMode,
 	}
 
 	l, err := readline.NewEx(&readline.Config{
@@ -136,22 +137,26 @@ func (cli *Cli) recurse(c []command.Command, args []string, i int) error {
 			return nil
 		}
 		if cmd.Name == args[i] {
-			if len(args) > i+1 {
-				if child := cli.peakChildren(cmd.SubCommands, args[i+1]); child != nil {
-					cli.recurse(cmd.SubCommands, args, i+1)
+			if cli.OfflineMode && !cmd.OfflineAvailable {
+				fmt.Println("This command is not available in offline mode!")
+			} else {
+				if len(args) > i+1 {
+					if child := cli.peakChildren(cmd.SubCommands, args[i+1]); child != nil {
+						cli.recurse(cmd.SubCommands, args, i+1)
+					} else {
+						cmd.Func(args[i+1:])
+						fmt.Printf("\n")
+						notFound = false
+					}
 				} else {
 					cmd.Func(args[i+1:])
 					fmt.Printf("\n")
 					notFound = false
 				}
-			} else {
-				cmd.Func(args[i+1:])
-				fmt.Printf("\n")
-				notFound = false
 			}
 		}
 	}
-	if notFound && len(args) > 0 && args[0] != "help" {
+	if notFound && len(args) > 0 && args[0] != "help" && args[len(args) - 1] != "help" {
 		fmt.Println("command not found")
 	}
 	return nil
